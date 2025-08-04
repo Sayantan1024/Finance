@@ -23,7 +23,7 @@ function Signup() {
 
                     <div className="grid gap-6">
                         <div className="grid gap-3">
-                            <label htmlFor="email" className='text-left mt-10'>Username</label>
+                            <label htmlFor="username" className='text-left mt-10'>Username</label>
                             <input
                                 id="username"
                                 type="text"
