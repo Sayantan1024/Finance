@@ -6,15 +6,16 @@ const groupSchema = new Schema(
             type: String,
             required: true
         },
-        createdBy: [
+        members: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "User"
             }
         ],
-        members: {
+        createdBy: {
             type: Schema.Types.ObjectId,
-            ref: "User"
+            ref: "User",
+            required: true
         },
         isBookmarked: {
             type: Boolean
