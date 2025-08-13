@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js"
 import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
+import { Group } from "../models/group.model.js";
 
 
 const generateAccessAndRefreshToken = async (userId) => {
@@ -204,4 +205,33 @@ const changePassword = asyncHandler( async (req, res) => {
     .json(new ApiResponse(200, {}, "Password changed successfully"))
 })
 
-export {registerUser, loginUser, logoutUser, refreshAccessToken, getCurrentUser, updateAccountDetails, changePassword}
+const getBookmarkedGroups = asyncHandler( async (req, res) => {
+    const bookmarkedGroups = await User.aggregate([
+        {
+            $match: {_id: req.user?._id}
+        },
+        {
+            $lookup: {
+                from: "groups",
+                localField: "bookmarkedGroups",
+                foreignField: "_id",
+                as: "bookmarkedGroupDetails"
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                bookmarkedGroupDetails: 1
+            }
+        }
+    ])
+
+    if(!bookmarkedGroups?.length)
+        throw new ApiError(404, "Bookmarked groups does not exist")
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200, bookmarkedGroups[0]?.bookmarkedGroupDetails || []))
+})
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken, getCurrentUser, updateAccountDetails, changePassword, getBookmarkedGroups}

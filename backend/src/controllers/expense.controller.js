@@ -7,7 +7,7 @@ const createExpense = asyncHandler( async (req, res) => {
     const {title, amount, paidBy, group, participants, splitType, splitDetails, notes} = req.body
 
     if(!title || !amount || !paidBy)
-        throw new ApiError(400, "Please give required details")
+        throw new ApiError(400, "Required details not given")
 
     const expense = await Expense.create({
         title,

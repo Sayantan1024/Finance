@@ -9,7 +9,8 @@ const groupSchema = new Schema(
         members: [
             {
                 type: Schema.Types.ObjectId,
-                ref: "User"
+                ref: "User",
+                required: true
             }
         ],
         createdBy: {
@@ -18,7 +19,8 @@ const groupSchema = new Schema(
             required: true
         },
         isBookmarked: {
-            type: Boolean
+            type: Boolean,
+            default: false
         }
     }, 
     {timestamps: true}

@@ -23,7 +23,13 @@ const userSchema = new Schema(
         },
         refreshToken: {
             type: String
-        }
+        },
+        bookmarkedGroups: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Group"
+            }
+        ] 
     }, 
     {timestamps: true}
 )
