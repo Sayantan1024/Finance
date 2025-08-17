@@ -166,7 +166,72 @@ const getGroupExpenses = asyncHandler( async (req, res) => {
 
 //Finish this function (who owes/owed) with aggregation
 const getGroupExpenseSummary = asyncHandler( async (req, res) =>{
+    const {groupId} = req.params
 
+    const summary = await Expense.aggregate([
+        {
+            $match: {groupId : new mongoose.Types.ObjectId(groupId)}
+        },
+        //expand participants
+        {
+            $unwind: "$participants"
+        },
+        //calculate each user's shares
+        {
+            $addFields: {
+                individualShare: { $divide: ["$amount", {$size: "$participants"}]}
+            }
+        },
+        // Project transaction direction: from participant -> payer
+        {
+            $project: {
+                from: "$participants",
+                to: "$paidBy",
+                maount: "$individualShare"
+            }
+        },
+        {
+            $group: {
+                _id: {from: "$from", to: "$to"},
+                amount: {$sum: "$amount"}
+            }
+        },
+        // Lookup user details for from & to
+        {
+            $lookup: {
+                from: "users",
+                localField: "_id.from",
+                foreignField: "_id",
+                as: "fromDetails"
+            }
+        },
+        { $unwind: "$fromDetails" },
+        {
+            $lookup: {
+                from: "users",
+                localField: "_id.to",
+                foreignField: "_id",
+                as: "toDetails"
+            }
+        },
+        { $unwind: "$toDetails" },
+        // Final clean projection
+        {
+            $project: {
+                _id: 0,
+                from: "$fromDetails.username",
+                to: "$toDetails.username",
+                amount: 1
+            }
+        }
+    ])
+
+    if(!summary)
+        throw new ApiError(404, "Error in fetching group expense summary")
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200, summary, "Group expenses summary fetched successfully"))
 })
 
 export {createGroup, getAllGroupsForUser, getGroupById, updateGroup, deleteGroup, toggleBookmark, getGroupExpenses, getGroupExpenseSummary}
