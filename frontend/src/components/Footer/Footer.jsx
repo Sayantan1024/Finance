@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 function Footer() {
+    const date = new Date().getFullYear();
   return (
     <section className="relative overflow-hidden py-10 bg-gray-400 border border-t-2 border-t-black">
             <div className="relative z-10 mx-auto max-w-7xl px-4">
@@ -10,26 +11,26 @@ function Footer() {
                         <div className="flex h-full flex-col justify-between">
                             <div>
                                 <p className="text-sm text-gray-600">
-                                    &copy; Copyright 2023. All Rights Reserved by DevUI.
+                                    &copy; Copyright {date}. All Rights Reserved by DevUI.
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div className="w-full p-6 md:w-1/2 lg:w-2/12">
                         <div className="h-full">
-                            <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
+                            <h3 className="tracking-px mb-9 text-xs font-semibold uppercase text-gray-500">
                                 Company
                             </h3>
                             <ul>
-                                <li className="mb-4">
+                                <li className="mb-1">
                                     <Link
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
                                     >
-                                        Features
+                                        About
                                     </Link>
                                 </li>
-                                <li className="mb-4">
+                                <li className="mb-1">
                                     <Link
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
@@ -37,7 +38,7 @@ function Footer() {
                                         Pricing
                                     </Link>
                                 </li>
-                                <li className="mb-4">
+                                <li className="mb-1">
                                     <Link
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
@@ -50,7 +51,7 @@ function Footer() {
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
                                     >
-                                        Press Kit
+                                        Contact Us
                                     </Link>
                                 </li>
                             </ul>
@@ -59,31 +60,31 @@ function Footer() {
                     <div className="w-full p-6 md:w-1/2 lg:w-2/12">
                         <div className="h-full">
                             <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
-                                Support
+                                Account
                             </h3>
                             <ul>
-                                <li className="mb-4">
+                                <li className="mb-1">
                                     <Link
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
                                     >
-                                        Account
+                                        Log In 
                                     </Link>
                                 </li>
-                                <li className="mb-4">
+                                <li className="mb-1">
                                     <Link
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
                                     >
-                                        Help
+                                        Sign Up
                                     </Link>
                                 </li>
-                                <li className="mb-4">
+                                <li className="mb-1">
                                     <Link
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
                                     >
-                                        Contact Us
+                                        Reset Password
                                     </Link>
                                 </li>
                                 <li>
@@ -91,7 +92,7 @@ function Footer() {
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
                                     >
-                                        Customer Support
+                                        Help
                                     </Link>
                                 </li>
                             </ul>
@@ -103,7 +104,7 @@ function Footer() {
                                 Legals
                             </h3>
                             <ul>
-                                <li className="mb-4">
+                                <li className="mb-2">
                                     <Link
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
@@ -111,7 +112,7 @@ function Footer() {
                                         Terms &amp; Conditions
                                     </Link>
                                 </li>
-                                <li className="mb-4">
+                                <li className="mb-2">
                                     <Link
                                         className=" text-base font-medium text-gray-900 hover:text-gray-700"
                                         to="/"
