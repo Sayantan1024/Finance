@@ -1,4 +1,5 @@
 import mongoose, {Schema} from "mongoose"
+import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2"
 
 const groupSchema = new Schema(
     {
@@ -25,5 +26,7 @@ const groupSchema = new Schema(
     }, 
     {timestamps: true}
 )
+
+groupSchema.plugin(mongooseAggregatePaginate)
 
 export const Group = mongoose.model("Group", groupSchema)

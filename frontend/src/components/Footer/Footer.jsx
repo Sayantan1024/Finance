@@ -11,7 +11,7 @@ function Footer() {
                         <div className="flex h-full flex-col justify-between">
                             <div>
                                 <p className="text-sm text-gray-600">
-                                    &copy; Copyright {date}. All Rights Reserved by DevUI.
+                                    &copy; Copyright {date}.
                                 </p>
                             </div>
                         </div>
